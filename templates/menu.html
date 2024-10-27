@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {{ button_main_text }} </title>
+</head>
+<body>
+
+    <header>
+        {% block pagename %}
+
+            <h1> {{ pagename }} </h1>
+
+        {% endblock %}
+    </header>
+
+    <nav>
+        {% block menu %}
+
+        <button>
+            <a href="/"> Главная </a>
+        </button>
+
+        <p> <button>
+            <a href="/shop_template"> Магазин </a>
+        </button> </p>
+
+        <p> <button>
+            <a href="/basket_template"> Корзина </a>
+        </button> </p>
+
+        {% endblock %}
+    </nav>
+
+    <main>
+        {% block content %}
+
+        {% endblock %}
+    </main>
+
+</body>
+</html>
