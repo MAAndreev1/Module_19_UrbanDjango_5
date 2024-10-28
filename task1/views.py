@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from task1.models import *
+from django.core.paginator import Paginator
 
+numbers_of_page = 2
 
 # Create your views here.
 def main_template(request):
@@ -10,11 +12,20 @@ def main_template(request):
     return render(request, 'menu.html', context)
 
 def shop_template(request):
+    global numbers_of_page
+    if request.method == 'POST' and request.POST.get('numbers_of_page') != None:
+        numbers_of_page = request.POST.get('numbers_of_page')
+
     pagename = 'Игры'
     games = Game.objects.all()
+    paginator = Paginator(games, numbers_of_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
         'games': games,
         'pagename': pagename,
+        'page_obj': page_obj,
+        'numbers_of_page': numbers_of_page,
     }
     return render(request, 'shop_template.html', context)
 
